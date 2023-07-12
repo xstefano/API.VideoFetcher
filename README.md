@@ -1,7 +1,7 @@
 <div align="center">
 
 # VideoFetcher Web API
-
+![VisionAuditiva Logo](https://visionauditiva.azurewebsites.net/Image/logo2)
 
 </div>
 
