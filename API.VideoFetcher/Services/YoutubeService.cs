@@ -53,9 +53,19 @@ namespace API.VideoFetcher.Services
             return null;
         }
 
-        public Task<IEnumerable<AudioOnlyStreamInfo>> GetCointanerM4a(string videoUrl)
+        public async Task<IEnumerable<AudioOnlyStreamInfo>> GetCointanerM4a(string videoUrl)
         {
-            throw new NotImplementedException();
+            var decodedUrl = HttpUtility.UrlDecode(videoUrl);
+            var id = ExtractVideoId(decodedUrl);
+            var video = GetVideo(id);
+
+            if (video != null)
+            {
+                var streamManifest = await _youtubeClient.Videos.Streams.GetManifestAsync(video.Result.Url);
+                var streamInfo = streamManifest.GetAudioOnlyStreams().Where(s => s.Container == Container.Mp4); ;
+                return streamInfo;
+            }
+            return null;
         }
 
         public Task<Stream> DownloadMp4(string videoUrl, string url)
