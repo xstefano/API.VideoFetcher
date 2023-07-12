@@ -23,9 +23,19 @@ namespace API.VideoFetcher.Services
             return await _youtubeClient.Videos.GetAsync(id);
         }
 
-        public Task<string> GetBestUrlVideo(string videoUrl)
+        public async Task<string> GetBestUrlVideo(string videoUrl)
         {
-            throw new NotImplementedException();
+            var decodeUrl = HttpUtility.UrlDecode(videoUrl);
+            var id = ExtractVideoId(decodeUrl);
+            var video = GetVideo(id);
+
+            if (video != null)
+            {
+                var streamManifest = await _youtubeClient.Videos.Streams.GetManifestAsync(video.Result.Url);
+                var streamInfo = streamManifest.GetMuxedStreams().GetWithHighestVideoQuality();
+                return streamInfo.Url;
+            }
+            return null;
         }
 
         public Task<IEnumerable<MuxedStreamInfo>> GetContainerMp4(string videoUrl)
