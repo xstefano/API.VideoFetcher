@@ -68,9 +68,17 @@ namespace API.VideoFetcher.Services
             return null;
         }
 
-        public Task<Stream> DownloadMp4(string videoUrl, string url)
+        public async Task<Stream> DownloadMp4(string videoUrl, string url)
         {
-            throw new NotImplementedException();
+            var streamInfo = GetContainerMp4(videoUrl);
+
+            if (streamInfo != null)
+            {
+                var streamInfoF = streamInfo.Result.Where(x => x.VideoQuality.Label == quality).FirstOrDefault();
+                var stream = await _youtubeClient.Videos.Streams.GetAsync(streamInfoF);
+                return stream;
+            }
+            return null;
         }
 
         public Task<Stream> DownloadM4a(string videoUrl, int bytes)
