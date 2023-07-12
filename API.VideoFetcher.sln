@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.VideoFetcher", "API.VideoFetcher\API.VideoFetcher.csproj", "{2EC63138-7359-4A98-8B5E-7F671AC9E5B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EC63138-7359-4A98-8B5E-7F671AC9E5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC63138-7359-4A98-8B5E-7F671AC9E5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC63138-7359-4A98-8B5E-7F671AC9E5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC63138-7359-4A98-8B5E-7F671AC9E5B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2ABC9061-1456-4324-853E-D8AAB5419A7D}
+	EndGlobalSection
+EndGlobal
