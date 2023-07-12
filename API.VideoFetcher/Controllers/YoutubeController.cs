@@ -98,5 +98,24 @@ namespace API.VideoFetcher.Controllers
             }
             return Ok(_response);
         }
+
+        [HttpGet]
+        [Route("stream/videoUrl={videoUrl}/quality={quality}")]
+        public async Task<IActionResult> DownloadMp4(string videoUrl, string quality)
+        {
+            try
+            {
+                var video = await _youtubeService.GetVideo(videoUrl);
+                var stream = await _youtubeService.DownloadMp4(videoUrl, quality);
+                return File(stream, "video/mp4", $"{video.Title}");
+            }
+            catch (Exception ex)
+            {
+                _response.IsSucces = false;
+                _response.DisplayMessage = "Url incorrect";
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return Ok(_response);
+        }
     }
 }
