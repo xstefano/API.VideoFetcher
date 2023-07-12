@@ -53,7 +53,7 @@ namespace API.VideoFetcher.Services
             return null;
         }
 
-        public async Task<IEnumerable<AudioOnlyStreamInfo>> GetCointanerM4a(string videoUrl)
+        public async Task<IEnumerable<AudioOnlyStreamInfo>> GetContainerM4a(string videoUrl)
         {
             var decodedUrl = HttpUtility.UrlDecode(videoUrl);
             var id = ExtractVideoId(decodedUrl);
@@ -68,7 +68,7 @@ namespace API.VideoFetcher.Services
             return null;
         }
 
-        public async Task<Stream> DownloadMp4(string videoUrl, string url)
+        public async Task<Stream> DownloadMp4(string videoUrl, string quality)
         {
             var streamInfo = GetContainerMp4(videoUrl);
 
@@ -81,9 +81,17 @@ namespace API.VideoFetcher.Services
             return null;
         }
 
-        public Task<Stream> DownloadM4a(string videoUrl, int bytes)
+        public async Task<Stream> DownloadM4a(string videoUrl, int bytes)
         {
-            throw new NotImplementedException();
+            var streamInfo = GetContainerM4a(videoUrl);
+
+            if (streamInfo != null)
+            {
+                var streamInfoF = streamInfo.Result.Where(x => x.Size.Bytes == bytes).FirstOrDefault();
+                var stream = await _youtubeClient.Videos.Streams.GetAsync(streamInfoF);
+                return stream;
+            }
+            return null;
         }
 
         private string ExtractVideoId(string videoUrl) 
