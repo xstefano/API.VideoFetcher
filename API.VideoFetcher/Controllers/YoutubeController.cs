@@ -79,5 +79,24 @@ namespace API.VideoFetcher.Controllers
             return Ok(_response);
         }
 
+        [HttpGet]
+        [Route("getcontainerm4a/videoUrl={videoUrl}")]
+        public async Task<IActionResult> GetContainerM4a(string videoUrl)
+        {
+            try
+            {
+                var videos = await _youtubeService.GetContainerM4a(videoUrl);
+
+                _response.Result = videos;
+                _response.DisplayMessage = "M4a Information";
+            }
+            catch (Exception ex)
+            {
+                _response.IsSucces = false;
+                _response.DisplayMessage = "Url incorrect";
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return Ok(_response);
+        }
     }
 }
