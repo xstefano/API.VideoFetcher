@@ -38,5 +38,25 @@ namespace API.VideoFetcher.Controllers
             }
             return Ok(_response);
         }
+
+        [HttpGet]
+        [Route("getcontainer/videoUrl={videoUrl}")]
+        public async Task<IActionResult> GetContainerMp4(string videoUrl)
+        {
+            try
+            {
+                var videos = await _youtubeService.GetContainerMp4(videoUrl);
+
+                _response.Result = videos;
+                _response.DisplayMessage = "Video Information";
+            }
+            catch (Exception ex)
+            {
+                _response.IsSucces = false;
+                _response.DisplayMessage = "Url incorrect";
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return Ok(_response);
+        }
     }
 }
