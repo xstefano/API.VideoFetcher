@@ -46,7 +46,7 @@ namespace API.VideoFetcher.Services
 
             if (video != null)
             {
-                var streamManifest = await _youtubeClient.Videos.Streams.GetManifestAsync(video.Result.url);
+                var streamManifest = await _youtubeClient.Videos.Streams.GetManifestAsync(video.Result.Url);
                 var streamInfo = streamManifest.GetMuxedStreams().Where(s => s.Container == Container.Mp4);
                 return streamInfo;
             }
