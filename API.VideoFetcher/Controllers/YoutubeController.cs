@@ -117,5 +117,24 @@ namespace API.VideoFetcher.Controllers
             }
             return Ok(_response);
         }
+
+        [HttpGet]
+        [Route("streamm4a/videoUrl={videoUrl}/bytes={bytes}")]
+        public async Task<IActionResult> DownloadM4a(string videoUrl, int bytes)
+        {
+            try
+            {
+                var video = await _youtubeService.GetVideo(videoUrl);
+                var stream = await _youtubeService.DownloadM4a(videoUrl, bytes);
+                return File(stream, "audio/mp4a-latm", $"{video.Title}");
+            }
+            catch (Exception ex)
+            {
+                _response.IsSucces = false;
+                _response.DisplayMessage = "Url incorrect";
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return Ok(_response);
+        }
     }
 }
