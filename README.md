@@ -57,7 +57,7 @@ Este proyecto está licenciado bajo la Licencia GNU v3.0. Consulta el archivo [L
 
 ## Contacto
 
-Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de N00245955@upn.pe
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de andres.aleg.19@gmail.com
 
 ---
 
